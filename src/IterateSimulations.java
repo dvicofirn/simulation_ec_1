@@ -57,20 +57,24 @@ public class IterateSimulations {
                     tempList.add(curr);
                 }
             }
+            readList.add(tempList);
             br.close();
         }
         catch(Exception e){
             return null;
         }
-        int [][][] tripleArr = new int[readList.size()][][];
-        int indexOuter=0;
-        int indexIneer=0;
+        int [][][] tripleArr = new int[readList.size()-1][][];
+        int indexOuter=-1;
+        int indexIneer;
         for(List<String[]> stLis:readList){
-            tripleArr[indexOuter]=new int[stLis.size()][2];
-            for(String[] stArr:stLis){
-                tripleArr[indexOuter][indexIneer][0]=Integer.parseInt(stArr[0]);
-                tripleArr[indexOuter][indexIneer][1]=Integer.parseInt(stArr[1]);
-                indexIneer++;
+            if(indexOuter!=-1){
+                indexIneer=0;
+                tripleArr[indexOuter]=new int[stLis.size()][2];
+                for(String[] stArr:stLis){
+                    tripleArr[indexOuter][indexIneer][0]=Integer.parseInt(stArr[0]);
+                    tripleArr[indexOuter][indexIneer][1]=Integer.parseInt(stArr[1]);
+                    indexIneer++;
+                }
             }
             indexOuter++;
         }
@@ -81,11 +85,12 @@ public class IterateSimulations {
     public void oneSimulation(){
         int[][] costs=csvReadDouble("costs");
         int[][] edges=csvReadDouble("chic_choc_data");
+        int[][][] addition=csvReadTriple("addition1");
         if(costs==null || edges==null)
             return;
         Simulation simulation = new Simulation();
         simulation.overridenVertex(4039);
-        simulation.setItems(edges,new int[6][0][0],costs);
+        simulation.setItems(edges,addition,costs);
         int score=simulation.simulate(influencers[0]);
         System.out.println(score);
     }
