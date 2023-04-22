@@ -93,5 +93,5 @@ if __name__ == '__main__':
         csvData.extend(edges_to_add)
         print("finished round", i + 1)
     set = pd.DataFrame(csvData, columns=['user', 'firend'])
-    set.to_csv("C:\\Users\\USER\\Desktop\\hw1_ec\\addition" + str(outer) + ".csv", index=False)
+    set.to_csv("C:\\Users\\USER\\Desktop\\hw1_ec\\addition" + str(outer) + ".csv", index=False)#You should change that!
 
