@@ -2,16 +2,16 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
+    public static String inputFile="C:\\Users\\USER\\Desktop\\hw1_ec";
+    public static String influencerList="ID1_ID2";
+    public static String edges_data="chic_choc_data";
+    public static String costs_data="costs";
+    public static String addition_file="additions";
+    public static String addition_template="addition";
     public static void main(String[] args) {
-        int[][] influencers=new int[1][5];
-        influencers[0][0]=0;
-        influencers[0][1]=348;
-        influencers[0][2]=414;
-        influencers[0][3]=3980;
-        influencers[0][4]=686;
 
-        IterateSimulations iterateSimulations = new IterateSimulations("C:\\Users\\USER\\Desktop\\hw1_ec",influencers);
-        iterateSimulations.oneSimulation();
+        IterateSimulations iterateSimulations = new IterateSimulations(inputFile,edges_data,costs_data,addition_file,addition_template);
+        //iterateSimulations.oneSimulation();
+        iterateSimulations.runSimulations(1000,0,influencerList);
     }
 }

@@ -69,12 +69,12 @@ public class Simulation {
         }
         addPossibles.clear();
 
-        System.out.println(purchased);
-        System.out.println("Start");
+        //System.out.println(purchased);
+        //System.out.println("Start");
 
         //start simulation
         for(int round=0;round<additions.length;round++){
-            System.out.println("round "+(round+1));
+            //System.out.println("round "+(round+1));
             for(int i=0;i<additions[round].length;i++){
                 this.graph[additions[round][i][0]].newEdge(this.graph[additions[round][i][1]]);
                 this.graph[additions[round][i][1]].newEdge(this.graph[additions[round][i][0]]);
@@ -109,8 +109,8 @@ public class Simulation {
             tempPossibles.clear();
             addPossibles.clear();
 
-            System.out.println(purchased);
-            System.out.println("bought " + purchased.size());
+            //System.out.println(purchased);
+            //System.out.println("bought " + purchased.size());
         }
         score=purchased.size();
         for(int i=0;i<influencers.length;i++){
