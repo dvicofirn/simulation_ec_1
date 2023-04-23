@@ -121,7 +121,6 @@ public class Simulation {
                 }
             }
         }
-
         return score;
     }
 

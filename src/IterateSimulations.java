@@ -17,7 +17,7 @@ public class IterateSimulations {
         this.addition_template=addition_template;
     }
 
-    public int[][] csvReadDouble(String csvName){
+    public List<String[]> oneDimReadList(String csvName){
         List<String[]> readList = new LinkedList<>();
         try{
             BufferedReader br = new BufferedReader(
@@ -32,6 +32,13 @@ public class IterateSimulations {
         catch(Exception e){
             return null;
         }
+        return readList;
+    }
+
+    public int[][] csvReadDoubleFixed(String csvName){
+        List<String[]> readList = oneDimReadList(csvName);
+        if (readList==null)
+            return null;
         int [][] doubleArr = new int[readList.size()-1][readList.get(0).length];
         int index=-1;
         for(String[] stArr:readList){
@@ -44,6 +51,22 @@ public class IterateSimulations {
         }
         return doubleArr;
     }
+
+    public int[][] csvReadDoubleUnFixed(String csvName){
+        List<String[]> readList = oneDimReadList(csvName);
+        if (readList==null)
+            return null;
+        int [][] doubleArr = new int[readList.size()-1][];
+        for(int index=1; index<readList.size();index++){
+            String[] stArr=readList.get(index);
+            doubleArr[index-1]=new int[stArr.length];
+            for(int i=0; i<stArr.length;i++){
+                doubleArr[index-1][i]=Integer.parseInt(stArr[i]);
+            }
+        }
+        return doubleArr;
+    }
+
 
     public int[][][] csvReadTriple(String csvName){
         List<List<String[]>> readList = new LinkedList<>();
@@ -91,8 +114,8 @@ public class IterateSimulations {
 
 
     public void oneSimulation(int[] influencers){
-        int[][] edges=csvReadDouble(edges_data);
-        int[][] costs=csvReadDouble(costs_data);
+        int[][] edges=csvReadDoubleFixed(edges_data);
+        int[][] costs=csvReadDoubleFixed(costs_data);
 
         int[][][] addition=csvReadTriple(addition_file+"\\"+addition_template+"1");
         if(costs==null || edges==null || addition==null)
@@ -129,11 +152,11 @@ public class IterateSimulations {
     }
 
     public void runSimulations(int iterations, int nOfGroups, String influencerList){
-        int[][] edges=csvReadDouble(edges_data);
-        int[][] costs=csvReadDouble(costs_data);
+        int[][] edges=csvReadDoubleFixed(edges_data);
+        int[][] costs=csvReadDoubleFixed(costs_data);
         if(costs==null || edges==null)
             return;
-        int[][] influencers = csvReadDouble(influencerList);
+        int[][] influencers = csvReadDoubleUnFixed(influencerList);
         if(nOfGroups==0 || nOfGroups>influencers.length){
             nOfGroups=influencers.length;
         }
