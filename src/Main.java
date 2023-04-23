@@ -12,6 +12,6 @@ public class Main {
 
         IterateSimulations iterateSimulations = new IterateSimulations(inputFile,edges_data,costs_data,addition_file,addition_template);
         //iterateSimulations.oneSimulation();
-        iterateSimulations.runSimulations(120,0,influencerList);
+        iterateSimulations.runSimulations(125,0,influencerList);
     }
 }
